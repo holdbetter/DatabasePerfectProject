@@ -2,6 +2,7 @@ package com.holdbetter.dbperfectproject.room;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
@@ -9,17 +10,14 @@ import androidx.room.PrimaryKey;
 public class BookEntity
 {
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "book_id")
     public long bookId;
-
+    @ColumnInfo(name = "creator_id")
+    public long authorCreatorId;
     @ColumnInfo(name = "title")
     public String name;
-
-    @ColumnInfo(name = "author")
-    public String author;
-
     @ColumnInfo(name = "image")
     public int image;
-
     @ColumnInfo(name = "isbn")
     public long ISBN;
 
@@ -29,71 +27,21 @@ public class BookEntity
     }
 
     @Ignore
-    public BookEntity(long bookId, String name, String author, int image, long ISBN)
+    public BookEntity(long authorCreatorId, String name, int image, long ISBN)
     {
-        this.bookId = bookId;
+        this.authorCreatorId = authorCreatorId;
         this.name = name;
-        this.author = author;
         this.image = image;
         this.ISBN = ISBN;
     }
 
     @Ignore
-    public BookEntity(String name, String author, int image, long ISBN)
-    {
-        this.name = name;
-        this.author = author;
-        this.image = image;
-        this.ISBN = ISBN;
-    }
-
-    public long getBookId()
-    {
-        return bookId;
-    }
-
-    public void setBookId(long bookId)
+    public BookEntity(long bookId, long authorCreatorId, String name, int image, long ISBN)
     {
         this.bookId = bookId;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
+        this.authorCreatorId = authorCreatorId;
         this.name = name;
-    }
-
-    public String getAuthor()
-    {
-        return author;
-    }
-
-    public void setAuthor(String author)
-    {
-        this.author = author;
-    }
-
-    public int getImage()
-    {
-        return image;
-    }
-
-    public void setImage(int image)
-    {
         this.image = image;
-    }
-
-    public long getISBN()
-    {
-        return ISBN;
-    }
-
-    public void setISBN(long ISBN)
-    {
         this.ISBN = ISBN;
     }
 }

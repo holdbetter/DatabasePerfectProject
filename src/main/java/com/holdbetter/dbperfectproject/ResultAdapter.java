@@ -1,6 +1,9 @@
 package com.holdbetter.dbperfectproject;
 
 import android.graphics.drawable.Drawable;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
-import com.holdbetter.dbperfectproject.database.Book;
-import com.holdbetter.dbperfectproject.room.BookEntity;
+import com.holdbetter.dbperfectproject.room.BookDataRequest;
 
 import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHolder>
 {
-    private List<BookEntity> books;
+    private List<BookDataRequest> books;
 
-    public ResultAdapter(List<BookEntity> books)
+    public ResultAdapter(List<BookDataRequest> books)
     {
         this.books = books;
     }
@@ -41,19 +40,22 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHo
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position)
     {
-        BookEntity book = books.get(position);
+        BookDataRequest bookDataRequest = books.get(position);
 
-        Drawable imageBitmap = holder.itemView.getResources().getDrawable(book.getImage(), null);
-
-//        RequestOptions options = new RequestOptions().transform(new RoundedCorners(25));
+        Drawable imageBitmap = holder.itemView.getResources().getDrawable(bookDataRequest.bookImage, null);
 
         Glide.with(holder.itemView.getContext().getApplicationContext())
                 .load(imageBitmap)
                 .circleCrop()
                 .into(holder.bookImage);
 
-        holder.bookName.setText(book.getName());
-        holder.bookAuthor.setText(book.getAuthor());
+        holder.bookName.setText(bookDataRequest.bookTitle);
+
+        String nameAndSurname = String.valueOf(bookDataRequest.authorName.toUpperCase().charAt(0))
+                .concat(". ").concat(bookDataRequest.authorSurname);
+        SpannableStringBuilder span = new SpannableStringBuilder(nameAndSurname);
+        span.setSpan(new RelativeSizeSpan(1.5f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.bookAuthor.setText(span);
     }
 
     @Override

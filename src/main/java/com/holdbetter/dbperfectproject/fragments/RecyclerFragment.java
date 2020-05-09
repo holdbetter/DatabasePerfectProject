@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.holdbetter.dbperfectproject.R;
 import com.holdbetter.dbperfectproject.RecyclerMainAdapter;
 import com.holdbetter.dbperfectproject.database.Book;
+import com.holdbetter.dbperfectproject.room.AuthorAndBooks;
+import com.holdbetter.dbperfectproject.room.BookDataRequest;
 import com.holdbetter.dbperfectproject.room.BookEntity;
 
 import java.util.List;
@@ -30,9 +32,9 @@ public class RecyclerFragment extends Fragment
 //        this.books = books;
 //    }
 
-    private List<BookEntity> books;
+    private List<BookDataRequest> books;
 
-    public RecyclerFragment(List<BookEntity> books)
+    public RecyclerFragment(List<BookDataRequest> books)
     {
         this.books = books;
     }
