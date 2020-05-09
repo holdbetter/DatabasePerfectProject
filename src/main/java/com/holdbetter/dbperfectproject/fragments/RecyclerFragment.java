@@ -17,17 +17,27 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.holdbetter.dbperfectproject.R;
 import com.holdbetter.dbperfectproject.RecyclerMainAdapter;
 import com.holdbetter.dbperfectproject.database.Book;
+import com.holdbetter.dbperfectproject.room.BookEntity;
 
 import java.util.List;
 
 public class RecyclerFragment extends Fragment
 {
-    private List<Book> books;
+//    private List<Book> books;
+//
+//    public RecyclerFragment(List<Book> books)
+//    {
+//        this.books = books;
+//    }
 
-    public RecyclerFragment(List<Book> books)
+    private List<BookEntity> books;
+
+    public RecyclerFragment(List<BookEntity> books)
     {
         this.books = books;
     }
+
+
 
     @Nullable
     @Override

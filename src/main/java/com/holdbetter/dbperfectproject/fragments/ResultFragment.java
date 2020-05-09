@@ -14,14 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.holdbetter.dbperfectproject.R;
 import com.holdbetter.dbperfectproject.ResultAdapter;
 import com.holdbetter.dbperfectproject.database.Book;
+import com.holdbetter.dbperfectproject.room.BookEntity;
 
 import java.util.List;
 
 public class ResultFragment extends Fragment
 {
-    List<Book> books;
+    List<BookEntity> books;
 
-    public ResultFragment(List<Book> books)
+    public ResultFragment(List<BookEntity> books)
     {
         this.books = books;
     }

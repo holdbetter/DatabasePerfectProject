@@ -15,14 +15,15 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.holdbetter.dbperfectproject.database.Book;
+import com.holdbetter.dbperfectproject.room.BookEntity;
 
 import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHolder>
 {
-    private List<Book> books;
+    private List<BookEntity> books;
 
-    public ResultAdapter(List<Book> books)
+    public ResultAdapter(List<BookEntity> books)
     {
         this.books = books;
     }
@@ -40,7 +41,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHo
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position)
     {
-        Book book = books.get(position);
+        BookEntity book = books.get(position);
 
         Drawable imageBitmap = holder.itemView.getResources().getDrawable(book.getImage(), null);
 
