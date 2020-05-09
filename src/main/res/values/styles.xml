@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">
+            @color/colorPrimary
+        </item>
+        <item name="colorPrimaryDark">
+            @color/colorPrimaryDark
+        </item>
+        <item name="colorAccent">
+            @color/colorAccent
+        </item>
+
+        <item name="titleTextColor">
+            #FFFFFFFF
+        </item>
+
+        <item name="colorOnPrimary">
+            @color/colorAccent
+        </item>
+
+        <item name="android:editTextColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/searchColorHint</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="titleTextColor">?attr/colorOnPrimary</item>
+        <item name="subtitleTextColor">@color/material_on_primary_emphasis_medium</item>
+        <!-- Note: this theme overlay will only work if the style is applied directly to a Toolbar. -->
+        <item name="android:theme">@style/ThemeOverlay.MaterialComponents.Toolbar.Primary</item>
+    </style>
+
+</resources>
