@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity
         searchView.setQueryHint("Поиск книг");
 
 //        dbHelper = new DbHelper(this);
+
+
+
         new Thread(new Runnable()
         {
             @Override
@@ -116,9 +119,9 @@ public class MainActivity extends AppCompatActivity
                     database.bookDao().insert(dokinz);
                 }
 
-                List<BookEntity> books = database.bookDao().getBooks();
-                List<AuthorEntity> authors = database.bookDao().getAuthors();
-                List<AuthorAndBooks> authorsAndBook = database.bookDao().getAuthorAndBooks();
+//                List<BookEntity> books = database.bookDao().getBooks();
+//                List<AuthorEntity> authors = database.bookDao().getAuthors();
+//                List<AuthorAndBooks> authorsAndBook = database.bookDao().getAuthorAndBooks();
 
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();

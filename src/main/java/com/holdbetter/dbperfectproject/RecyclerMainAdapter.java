@@ -59,8 +59,11 @@ public class RecyclerMainAdapter extends RecyclerView.Adapter<RecyclerMainAdapte
                 .into(holder.bookImage);
 
         holder.bookName.setText(bookDataRequest.bookTitle);
+
+
         String nameAndSurname = String.valueOf(bookDataRequest.authorName.toUpperCase().charAt(0))
                 .concat(". ").concat(bookDataRequest.authorSurname);
+
         SpannableStringBuilder span = new SpannableStringBuilder(nameAndSurname);
         span.setSpan(new RelativeSizeSpan(1.5f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.bookAuthor.setText(span);

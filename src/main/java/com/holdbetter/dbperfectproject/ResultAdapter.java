@@ -53,6 +53,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHo
 
         String nameAndSurname = String.valueOf(bookDataRequest.authorName.toUpperCase().charAt(0))
                 .concat(". ").concat(bookDataRequest.authorSurname);
+
         SpannableStringBuilder span = new SpannableStringBuilder(nameAndSurname);
         span.setSpan(new RelativeSizeSpan(1.5f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.bookAuthor.setText(span);
