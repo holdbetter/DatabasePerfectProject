@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="8dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -11,7 +11,8 @@
         android:layout_height="85dp"
         android:layout_marginStart="16dp"
         android:layout_gravity="center_vertical"
-        android:contentDescription="@string/bookImageDescriptor"/>
+        android:contentDescription="@string/bookImageDescriptor"
+        tools:src="@drawable/autostop"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -36,7 +37,7 @@
             android:layout_marginTop="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Default"
+            android:text="@string/default_text"
             android:maxWidth="250dp"
             android:textColor="#A3A2A2"
             android:textSize="12sp"

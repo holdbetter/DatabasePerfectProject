@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.holdbetter.dbperfectproject.R;
 import com.holdbetter.dbperfectproject.ResultAdapter;
 import com.holdbetter.dbperfectproject.model.BookDataRequest;
@@ -22,13 +23,7 @@ import java.util.List;
 
 public class ResultFragment extends Fragment
 {
-    List<BookDataRequest> books;
-    String query;
-
-    public ResultFragment(List<BookDataRequest> books)
-    {
-        this.books = books;
-    }
+    private String query;
 
     public ResultFragment(String queryString)
     {
@@ -41,25 +36,12 @@ public class ResultFragment extends Fragment
     {
         View resultFragment = inflater.inflate(R.layout.result_fragment, container, false);
 
-        RecyclerView r = resultFragment.findViewById(R.id.recycleResult);
-        ResultAdapter adapter = new ResultAdapter();
-        r.setAdapter(adapter);
-
         BooksViewModel model = new ViewModelProvider(requireActivity()).get(BooksViewModel.class);
-        model.searchBook(query).observe(getViewLifecycleOwner(), new Observer<List<BookDataRequest>>()
-        {
-            @Override
-            public void onChanged(List<BookDataRequest> bookDataRequests)
-            {
-                if (bookDataRequests != null && bookDataRequests.size() > 0)
-                {
-                    adapter.setBooks(bookDataRequests);
-                }
-            }
-        });
 
-
-        r.setLayoutManager(new LinearLayoutManager(getActivity()));
+        RecyclerView recycler = resultFragment.findViewById(R.id.recycleResult);
+        ResultAdapter adapter = new ResultAdapter(model.searchBook(query), Glide.with(this));
+        recycler.setAdapter(adapter);
+        recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return resultFragment;
     }

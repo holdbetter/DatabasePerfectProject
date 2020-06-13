@@ -62,17 +62,15 @@ public class RecyclerMainAdapter extends RecyclerView.Adapter<RecyclerMainAdapte
         BookDataRequest bookDataRequest = books.get(position);
 
         // first item margin setup
-        if(position == 0) {
-            LinearLayout root = holder.binding.getRoot();
-            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) root.getLayoutParams();
-
-            int px = (int) (20 * Resources.getSystem().getDisplayMetrics().density);
-
-            params.setMarginStart(px);
-            root.setLayoutParams(params);
-        }
-
-//        Drawable drawable = holder.itemView.getResources().getDrawable(bookDataRequest.bookImage, null);
+//        if(position == 0) {
+//            LinearLayout root = holder.binding.getRoot();
+//            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) root.getLayoutParams();
+//
+//            int px = (int) (20 * Resources.getSystem().getDisplayMetrics().density);
+//
+//            params.setMarginStart(px);
+//            root.setLayoutParams(params);
+//        }
 
         RequestOptions options = new RequestOptions()
                 .transform(new CenterCrop(), new RoundedCorners(18))

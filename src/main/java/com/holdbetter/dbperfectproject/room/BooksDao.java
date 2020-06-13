@@ -33,7 +33,8 @@ public abstract class BooksDao
             "name as authorName, " +
             "surname as authorSurname " +
             "FROM books " +
-            "INNER JOIN authors ON author_id = creator_id ")
+            "INNER JOIN authors ON author_id = creator_id " +
+            "ORDER BY bookTitle")
     public abstract LiveData<List<BookDataRequest>> getBooksAndAuthor();
 
     @Query("SELECT book_id as id, " +
@@ -44,8 +45,9 @@ public abstract class BooksDao
             "FROM books " +
             "INNER JOIN authors ON author_id = creator_id " +
             "WHERE title LIKE :queryString OR " +
-            "name LIKE :queryString")
-    public abstract LiveData<List<BookDataRequest>> search(String queryString);
+            "name LIKE :queryString " +
+            "ORDER BY authorSurname")
+    public abstract List<BookDataRequest> search(String queryString);
 
     @Transaction
     public void insert(AuthorAndBooks authorAndBook)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -11,7 +12,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle"
         android:layout_marginTop="24dp"
+        android:paddingStart="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:adapter="@{adapter}"/>
+        app:adapter="@{adapter}"
+        tools:ignore="RtlSymmetry" />
 </layout>

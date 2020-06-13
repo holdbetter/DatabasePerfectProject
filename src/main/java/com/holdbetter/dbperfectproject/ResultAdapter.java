@@ -13,7 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.holdbetter.dbperfectproject.databinding.ResultInstanceBinding;
 import com.holdbetter.dbperfectproject.model.BookDataRequest;
 
 import java.util.ArrayList;
@@ -21,12 +24,14 @@ import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHolder>
 {
+    private RequestManager glide;
     private List<BookDataRequest> books = new ArrayList<>();
 
-//    public ResultAdapter(List<BookDataRequest> books)
-//    {
-//        this.books = books;
-//    }
+    public ResultAdapter(List<BookDataRequest> books, RequestManager glide)
+    {
+        this.books = books;
+        this.glide = glide;
+    }
 
     @NonNull
     @Override
@@ -35,37 +40,18 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHo
         View bookInstance = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.result_instance, parent, false);
 
-        return new BookViewHolder(bookInstance);
+        return new BookViewHolder(ResultInstanceBinding.bind(bookInstance));
     }
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position)
     {
-//        BookDataRequest bookDataRequest = books.get(position);
-//
-//        Drawable imageBitmap = holder.itemView.getResources().getDrawable(bookDataRequest.bookImage, null);
-//
-//        Glide.with(holder.itemView.getContext().getApplicationContext())
-//                .load(imageBitmap)
-//                .circleCrop()
-//                .into(holder.bookImage);
-//
-//        holder.bookName.setText(bookDataRequest.bookTitle);
-//
-//        String nameAndSurname = String.valueOf(bookDataRequest.authorName.toUpperCase().charAt(0))
-//                .concat(". ").concat(bookDataRequest.authorSurname);
-//
-//        SpannableStringBuilder span = new SpannableStringBuilder(nameAndSurname);
-//        span.setSpan(new RelativeSizeSpan(1.5f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        holder.bookAuthor.setText(span);
-
         BookDataRequest bookDataRequest = books.get(position);
 
-        Drawable imageBitmap = holder.itemView.getResources().getDrawable(bookDataRequest.bookImage, null);
-
-        Glide.with(holder.itemView.getContext().getApplicationContext())
-                .load(imageBitmap)
+        glide.load(bookDataRequest.bookImage)
                 .circleCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(holder.bookImage);
 
         holder.bookName.setText(bookDataRequest.bookTitle);
@@ -81,12 +67,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHo
     @Override
     public int getItemCount()
     {
-        return books.size();
-    }
-
-    public void setBooks(List<BookDataRequest> books)
-    {
-        this.books = books;
+        return books != null ? books.size() : 0;
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder
@@ -95,13 +76,17 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHo
         TextView bookName;
         TextView bookAuthor;
 
-        public BookViewHolder(@NonNull View v)
-        {
-            super(v);
+        ResultInstanceBinding binding;
 
-            bookImage = v.findViewById(R.id.bookImage);
-            bookName = v.findViewById(R.id.bookName);
-            bookAuthor = v.findViewById(R.id.bookAuthor);
+        public BookViewHolder(@NonNull ResultInstanceBinding binding)
+        {
+            super(binding.getRoot());
+
+            this.binding = binding;
+
+            bookImage = binding.bookImage;
+            bookName = binding.bookName;
+            bookAuthor = binding.bookAuthor;
         }
     }
 }
