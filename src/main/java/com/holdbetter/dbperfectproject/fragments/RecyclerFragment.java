@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 import androidx.recyclerview.widget.SnapHelper;
 
+import com.bumptech.glide.Glide;
 import com.holdbetter.dbperfectproject.RecyclerMainAdapter;
 import com.holdbetter.dbperfectproject.databinding.RecyclerFragmentBinding;
 import com.holdbetter.dbperfectproject.viewmodel.BooksViewModel;
@@ -27,17 +28,13 @@ public class RecyclerFragment extends Fragment
     {
         RecyclerFragmentBinding binding = RecyclerFragmentBinding.inflate(inflater, container, false);
         RecyclerView recyclerView = binding.recycle;
-        BooksViewModel model = new ViewModelProvider(requireActivity()).get(BooksViewModel.class);
-        RecyclerMainAdapter adapter = new RecyclerMainAdapter();
-        adapter.setBooks(model.getmBooksDataList1().getValue());
+        RecyclerMainAdapter adapter = new RecyclerMainAdapter(Glide.with(this));
         binding.setAdapter(adapter);
 
-//        model.getBooksDataList().observe(getViewLifecycleOwner(), binding.getAdapter()::setBooks);
+        BooksViewModel model = new ViewModelProvider(requireActivity()).get(BooksViewModel.class);
+        model.getBooksDataList().observe(getViewLifecycleOwner(), binding.getAdapter()::setBooks);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
-
-        SnapHelper helper = new LinearSnapHelper();
-        helper.attachToRecyclerView(recyclerView);
 
         return binding.getRoot();
     }

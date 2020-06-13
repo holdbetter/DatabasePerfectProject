@@ -45,22 +45,11 @@ public class MainActivity extends AppCompatActivity
         BooksViewModel model = new ViewModelProvider(this).get(BooksViewModel.class);
         binding.setModel(model);
 
-//        try
-//        {
-//            if (new BookRepository(getApplication()).getBookCount().get() == 0)
-//            {
-//                model.welcomeInsert();
-//            }
-//        } catch (ExecutionException | InterruptedException e)
-//        {
-//            e.printStackTrace();
-//        }
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.mainContent, new RecyclerFragment());
-//        transaction.add(R.id.mainContent, new RecyclerFragment());
-//        transaction.add(R.id.mainContent, new RecyclerFragment());
-//        transaction.add(R.id.mainContent, new RecyclerFragment());
+        transaction.add(R.id.mainContent, new RecyclerFragment());
+        transaction.add(R.id.mainContent, new RecyclerFragment());
+        transaction.add(R.id.mainContent, new RecyclerFragment());
+        transaction.add(R.id.mainContent, new RecyclerFragment());
         transaction.add(R.id.mainContent, new RecyclerFragment()).commit();
     }
 

@@ -3,7 +3,7 @@
     android:layout_width="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
@@ -22,10 +22,10 @@
             tools:src="@drawable/future"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_bookmark"
+            app:srcCompat="@drawable/ic_bookmark"
             app:layout_constraintTop_toTopOf="@id/bookImage"
             app:layout_constraintLeft_toLeftOf="@id/bookImage"
             app:layout_constraintRight_toRightOf="@id/bookImage"
@@ -33,6 +33,7 @@
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/bookName"
         android:layout_marginTop="5dp"
