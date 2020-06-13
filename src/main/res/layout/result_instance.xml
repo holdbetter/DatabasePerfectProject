@@ -23,7 +23,7 @@
             android:id="@+id/bookName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Default"
+            android:text="@string/default_text"
             android:ellipsize="end"
             android:maxWidth="250dp"
             android:textSize="18sp"

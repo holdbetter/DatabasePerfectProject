@@ -125,12 +125,12 @@ public class DbHelper extends SQLiteOpenHelper
         List<Book> results = new ArrayList<>();
 
         String[] columns =
-        {
-            BookContract.BookEntry.Name,
-            BookContract.BookEntry.Author,
-            BookContract.BookEntry.Image,
-            BookContract.BookEntry.ISBN
-        };
+                {
+                        BookContract.BookEntry.Name,
+                        BookContract.BookEntry.Author,
+                        BookContract.BookEntry.Image,
+                        BookContract.BookEntry.ISBN
+                };
 
         String[] words = searchQuery.trim().split(" ", 2);
         String firstWord = words[0];
@@ -138,7 +138,7 @@ public class DbHelper extends SQLiteOpenHelper
 
         String whereClause = BookContract.BookEntry.Name + " LIKE ?" +
                 " OR " + BookContract.BookEntry.Author + " LIKE ?";
-        String[] whereArgs = { firstWord, firstWord };
+        String[] whereArgs = {firstWord, firstWord};
 
         Cursor cursor = database.query(BookContract.BookEntry.TABLE_NAME,
                 columns,

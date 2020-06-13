@@ -1,58 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinator"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:backgroundTint="#F2F2F2"
-    android:fitsSystemWindows="true">
+<layout>
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <data>
+        <variable
+            name="model"
+            type="com.holdbetter.dbperfectproject.viewmodel.BooksViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        >
+        android:layout_height="match_parent"
+        android:backgroundTint="#F2F2F2">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:paddingHorizontal="18dp"
-            android:id="@+id/toolbar"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="enterAlways|snap|scroll"
-            app:menu="@menu/menu"
-            android:backgroundTint="#FFFFFF"
-            app:title="@string/main" />
+            >
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:paddingHorizontal="18dp"
+                android:id="@+id/toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="enterAlways|snap|scroll"
+                app:menu="@menu/menu"
+                android:backgroundTint="#FFFFFF"
+                app:title="@string/main" />
 
+        </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/searchResults"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:paddingEnd="24dp"
-        tools:ignore="RtlSymmetry">
-
-        <LinearLayout
-            android:id="@+id/mainContent"
-            android:layout_gravity="center_horizontal"
+        <FrameLayout
+            android:id="@+id/searchResults"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:nestedScrollingEnabled="true"
-            android:paddingBottom="24dp"
-            android:orientation="vertical">
-        </LinearLayout>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
 
-    </androidx.core.widget.NestedScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:paddingEnd="24dp"
+            tools:ignore="RtlSymmetry">
+
+            <LinearLayout
+                android:id="@+id/mainContent"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="true"
+                android:paddingBottom="24dp"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_add_24"
+            app:backgroundTint="#FFFFFF"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:onClick="@{() -> model.randomInsert()}"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -4,5 +4,6 @@
     <string name="search_menu">Search</string>
     <string name="search_results_is_empty">Мы ничего не нашли :(</string>
     <string name="bookImageDescriptor">bookImage</string>
+    <string name="default_text">Default</string>
 
 </resources>

@@ -12,27 +12,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.RequestOptions;
-import com.holdbetter.dbperfectproject.database.Book;
-import com.holdbetter.dbperfectproject.room.AuthorAndBooks;
-import com.holdbetter.dbperfectproject.room.BookDataRequest;
-import com.holdbetter.dbperfectproject.room.BookEntity;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
+import com.holdbetter.dbperfectproject.model.BookDataRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerMainAdapter extends RecyclerView.Adapter<RecyclerMainAdapter.BookViewHolder>
 {
-    private List<BookDataRequest> books;
-
-    public RecyclerMainAdapter(List<BookDataRequest> books)
-    {
-        this.books = books;
-    }
+    private List<BookDataRequest> books = new ArrayList<>();
 
     @NonNull
     @Override
@@ -74,7 +73,13 @@ public class RecyclerMainAdapter extends RecyclerView.Adapter<RecyclerMainAdapte
     @Override
     public int getItemCount()
     {
-        return books.size();
+        return books != null ? books.size() : 0;
+    }
+
+    public void setBooks(List<BookDataRequest> books)
+    {
+        this.books = books;
+        notifyDataSetChanged();
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder

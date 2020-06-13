@@ -1,4 +1,4 @@
-package com.holdbetter.dbperfectproject.room;
+package com.holdbetter.dbperfectproject.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

@@ -1,9 +1,11 @@
-package com.holdbetter.dbperfectproject.room;
+package com.holdbetter.dbperfectproject.model;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-import java.util.ArrayList;
+import com.holdbetter.dbperfectproject.model.AuthorEntity;
+import com.holdbetter.dbperfectproject.model.BookEntity;
+
 import java.util.List;
 
 public class AuthorAndBooks

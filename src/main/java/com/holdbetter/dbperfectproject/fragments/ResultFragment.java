@@ -8,22 +8,31 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.holdbetter.dbperfectproject.R;
 import com.holdbetter.dbperfectproject.ResultAdapter;
-import com.holdbetter.dbperfectproject.room.BookDataRequest;
+import com.holdbetter.dbperfectproject.model.BookDataRequest;
+import com.holdbetter.dbperfectproject.viewmodel.BooksViewModel;
 
 import java.util.List;
 
 public class ResultFragment extends Fragment
 {
     List<BookDataRequest> books;
+    String query;
 
     public ResultFragment(List<BookDataRequest> books)
     {
         this.books = books;
+    }
+
+    public ResultFragment(String queryString)
+    {
+        this.query = queryString;
     }
 
     @Nullable
@@ -33,8 +42,23 @@ public class ResultFragment extends Fragment
         View resultFragment = inflater.inflate(R.layout.result_fragment, container, false);
 
         RecyclerView r = resultFragment.findViewById(R.id.recycleResult);
-        ResultAdapter adapter = new ResultAdapter(books);
+        ResultAdapter adapter = new ResultAdapter();
         r.setAdapter(adapter);
+
+        BooksViewModel model = new ViewModelProvider(requireActivity()).get(BooksViewModel.class);
+        model.searchBook(query).observe(getViewLifecycleOwner(), new Observer<List<BookDataRequest>>()
+        {
+            @Override
+            public void onChanged(List<BookDataRequest> bookDataRequests)
+            {
+                if (bookDataRequests != null && bookDataRequests.size() > 0)
+                {
+                    adapter.setBooks(bookDataRequests);
+                }
+            }
+        });
+
+
         r.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return resultFragment;

@@ -14,18 +14,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.holdbetter.dbperfectproject.room.BookDataRequest;
+import com.holdbetter.dbperfectproject.model.BookDataRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHolder>
 {
-    private List<BookDataRequest> books;
+    private List<BookDataRequest> books = new ArrayList<>();
 
-    public ResultAdapter(List<BookDataRequest> books)
-    {
-        this.books = books;
-    }
+//    public ResultAdapter(List<BookDataRequest> books)
+//    {
+//        this.books = books;
+//    }
 
     @NonNull
     @Override
@@ -40,6 +41,24 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHo
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position)
     {
+//        BookDataRequest bookDataRequest = books.get(position);
+//
+//        Drawable imageBitmap = holder.itemView.getResources().getDrawable(bookDataRequest.bookImage, null);
+//
+//        Glide.with(holder.itemView.getContext().getApplicationContext())
+//                .load(imageBitmap)
+//                .circleCrop()
+//                .into(holder.bookImage);
+//
+//        holder.bookName.setText(bookDataRequest.bookTitle);
+//
+//        String nameAndSurname = String.valueOf(bookDataRequest.authorName.toUpperCase().charAt(0))
+//                .concat(". ").concat(bookDataRequest.authorSurname);
+//
+//        SpannableStringBuilder span = new SpannableStringBuilder(nameAndSurname);
+//        span.setSpan(new RelativeSizeSpan(1.5f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        holder.bookAuthor.setText(span);
+
         BookDataRequest bookDataRequest = books.get(position);
 
         Drawable imageBitmap = holder.itemView.getResources().getDrawable(bookDataRequest.bookImage, null);
@@ -63,6 +82,11 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHo
     public int getItemCount()
     {
         return books.size();
+    }
+
+    public void setBooks(List<BookDataRequest> books)
+    {
+        this.books = books;
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder
