@@ -1,47 +1,40 @@
 package com.holdbetter.dbperfectproject;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
 import com.holdbetter.dbperfectproject.databinding.BookInstanceBinding;
 import com.holdbetter.dbperfectproject.model.BookDataRequest;
+import com.holdbetter.dbperfectproject.services.BookDataInfo;
+import com.holdbetter.dbperfectproject.services.BookSetup;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class RecyclerMainAdapter extends RecyclerView.Adapter<RecyclerMainAdapter.BookViewHolder>
+public class RecycleNonNetworkDataAdapter extends RecyclerView.Adapter<RecycleNonNetworkDataAdapter.BookViewHolder>
+        implements BookSetup
 {
-    private List<BookDataRequest> books = new ArrayList<>();
+    private List<?> books = new ArrayList<>();
     private RequestManager glide;
 
-    public RecyclerMainAdapter(RequestManager glide)
+    public RecycleNonNetworkDataAdapter(RequestManager glide)
     {
         this.glide = glide;
     }
@@ -59,36 +52,33 @@ public class RecyclerMainAdapter extends RecyclerView.Adapter<RecyclerMainAdapte
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position)
     {
-        BookDataRequest bookDataRequest = books.get(position);
-
-        // first item margin setup
-//        if(position == 0) {
-//            LinearLayout root = holder.binding.getRoot();
-//            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) root.getLayoutParams();
-//
-//            int px = (int) (20 * Resources.getSystem().getDisplayMetrics().density);
-//
-//            params.setMarginStart(px);
-//            root.setLayoutParams(params);
-//        }
+        BookDataInfo bookDataInfo = (BookDataInfo) books.get(position);
 
         RequestOptions options = new RequestOptions()
                 .transform(new CenterCrop(), new RoundedCorners(18))
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
 
-        glide.load(bookDataRequest.bookImage)
+        glide.load(bookDataInfo.bookImage)
                 .apply(options)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(holder.bookImage);
 
-        holder.bookName.setText(bookDataRequest.bookTitle);
+        holder.bookName.setText(bookDataInfo.bookTitle);
 
-        String nameAndSurname = String.valueOf(bookDataRequest.authorName.toUpperCase().charAt(0))
-                .concat(". ").concat(bookDataRequest.authorSurname);
+        if (bookDataInfo instanceof BookDataRequest)
+        {
+            BookDataRequest bookDataRequest = (BookDataRequest) bookDataInfo;
+            String nameAndSurname = String.valueOf(bookDataRequest.authorName.toUpperCase().charAt(0))
+                    .concat(". ").concat(bookDataInfo.authorSurname);
+            SpannableStringBuilder span = new SpannableStringBuilder(nameAndSurname);
+            span.setSpan(new RelativeSizeSpan(1.5f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            holder.bookAuthor.setText(span);
+        }
+        else
+        {
+            holder.bookAuthor.setText(bookDataInfo.authorSurname);
+        }
 
-        SpannableStringBuilder span = new SpannableStringBuilder(nameAndSurname);
-        span.setSpan(new RelativeSizeSpan(1.5f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        holder.bookAuthor.setText(span);
         holder.bookAuthor.setSingleLine(true);
         holder.bookAuthor.setEllipsize(TextUtils.TruncateAt.END);
     }
@@ -99,7 +89,14 @@ public class RecyclerMainAdapter extends RecyclerView.Adapter<RecyclerMainAdapte
         return books != null ? books.size() : 0;
     }
 
-    public void setBooks(List<BookDataRequest> books)
+//    public void setBooks(List<? extends BookDataInfo> books)
+//    {
+//        this.books = books;
+//        notifyDataSetChanged();
+//    }
+
+    @Override
+    public void setBooks(List<?> books)
     {
         this.books = books;
         notifyDataSetChanged();

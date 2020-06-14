@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">DbPerfectProject</string>
-    <string name="main">Главная</string>
+    <string name="main">DbPerfectProject</string>
     <string name="search_menu">Search</string>
     <string name="search_results_is_empty">Мы ничего не нашли :(</string>
     <string name="bookImageDescriptor">bookImage</string>
     <string name="default_text">Default</string>
+    <string name="roomRecyclerTitle">Room with LiveData performance</string>
+    <string name="roomRecyclerTitleHint">* auto-update content after FAB press</string>
+    <string name="sqliteRecyclerTitle">SQLiteOpenHelper performance</string>
+    <string name="sqliteRecyclerTitleHint">* non-updatable</string>
+    <string name="downloadingRecyclerTitle">Network data downloading</string>
+    <string name="downloadingRecyclerTitleHint">downloading…</string>
 
 </resources>

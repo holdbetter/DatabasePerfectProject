@@ -18,12 +18,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.holdbetter.dbperfectproject.databinding.ActivityMainBinding;
 import com.holdbetter.dbperfectproject.fragments.RecyclerFragment;
 import com.holdbetter.dbperfectproject.fragments.ResultFragment;
-import com.holdbetter.dbperfectproject.room.BookDatabase;
-import com.holdbetter.dbperfectproject.room.BookRepository;
 import com.holdbetter.dbperfectproject.viewmodel.BooksViewModel;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -46,11 +43,9 @@ public class MainActivity extends AppCompatActivity
         binding.setModel(model);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.mainContent, new RecyclerFragment());
-        transaction.add(R.id.mainContent, new RecyclerFragment());
-        transaction.add(R.id.mainContent, new RecyclerFragment());
-        transaction.add(R.id.mainContent, new RecyclerFragment());
-        transaction.add(R.id.mainContent, new RecyclerFragment()).commit();
+        transaction.replace(R.id.bookshelf1, RecyclerFragment.getInstance(RecyclerType.RoomAndLiveData));
+        transaction.replace(R.id.bookshelf2, RecyclerFragment.getInstance(RecyclerType.SQLiteOpenHelper));
+        transaction.replace(R.id.bookshelf3, RecyclerFragment.getInstance(RecyclerType.DownloadingData)).commit();
     }
 
     private void searchViewSetup()
@@ -113,15 +108,15 @@ public class MainActivity extends AppCompatActivity
             if (fragments.size() > 1)
             {
                 transaction.addToBackStack("Home");
-            }
-            else
+            } else
             {
                 transaction.addToBackStack("MoreSearch");
             }
 
             transaction.commit();
 
-            runOnUiThread(() -> {
+            runOnUiThread(() ->
+            {
                 MenuItem searchMenuItem = binding.toolbar.getMenu().findItem(R.id.searchMenuItem);
                 SearchView searchView = (SearchView) searchMenuItem.getActionView();
                 searchView.clearFocus();

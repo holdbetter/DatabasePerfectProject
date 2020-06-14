@@ -6,15 +6,50 @@
     <data>
         <variable
             name="adapter"
-            type="com.holdbetter.dbperfectproject.RecyclerMainAdapter" />
+            type="com.holdbetter.dbperfectproject.services.BookSetup" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle"
-        android:layout_marginTop="24dp"
-        android:paddingStart="20dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:adapter="@{adapter}"
-        tools:ignore="RtlSymmetry" />
+        android:paddingStart="20dp"
+        tools:ignore="RtlSymmetry">
+
+        <TextView
+            android:id="@+id/recycleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="20dp"
+            android:text="Room with LiveData perfomance"
+            android:fontFamily="@font/roboto_slab_regular"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="?colorAccent"
+            />
+
+        <TextView
+            android:id="@+id/recycleTitleHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="* auto-updates after FAB press"
+            android:fontFamily="@font/roboto_slab_regular"
+            android:textColor="#979797"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/recycleTitle"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            tools:ignore="RtlSymmetry"
+            app:layout_constraintTop_toBottomOf="@id/recycleTitleHint"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

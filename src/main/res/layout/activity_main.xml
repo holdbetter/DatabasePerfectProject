@@ -56,6 +56,22 @@
                 android:nestedScrollingEnabled="true"
                 android:paddingBottom="24dp"
                 android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/bookshelf1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <FrameLayout
+                    android:id="@+id/bookshelf2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <FrameLayout
+                    android:id="@+id/bookshelf3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

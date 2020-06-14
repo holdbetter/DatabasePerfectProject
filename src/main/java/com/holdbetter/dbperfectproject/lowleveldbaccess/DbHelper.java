@@ -1,15 +1,12 @@
-package com.holdbetter.dbperfectproject.database;
+package com.holdbetter.dbperfectproject.lowleveldbaccess;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.holdbetter.dbperfectproject.R;
 
@@ -20,22 +17,11 @@ public class DbHelper extends SQLiteOpenHelper
 {
     private static final String DB_NAME = "films.db";
     private static final int DB_VERSION = 1;
-    private Context mContext;
     private SQLiteDatabase database;
 
     public DbHelper(@Nullable Context context)
     {
         super(context, DB_NAME, null, DB_VERSION);
-        this.mContext = context;
-
-        database = this.getReadableDatabase();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.P)
-    public DbHelper(@Nullable Context context, @NonNull SQLiteDatabase.OpenParams openParams)
-    {
-        super(context, DB_NAME, DB_VERSION, openParams);
-        this.mContext = context;
 
         database = this.getReadableDatabase();
     }
@@ -52,28 +38,30 @@ public class DbHelper extends SQLiteOpenHelper
 
         db.execSQL(SQL_CREATE_TABLE);
 
-        Book futureBook = new Book("Будущее", "Глуховский", R.drawable.future, 0);
-        Book sapiensBook = new Book("Sapiens. Краткая история человечества", "Харари", R.drawable.sapiens, 0);
-        Book mandelBook = new Book("Я вернулся в мой город", "Мандельштам", R.drawable.go_back_to_my_town, 0);
-        Book orwellBook = new Book("1984", "Оруэлл", R.drawable.one_nine_eight_four, 0);
-        Book jobsBook = new Book("Стив Джобс", "Айзексон", R.drawable.steve_jobs, 0);
-        Book dokinsBook = new Book("Эгоистичный ген", "Докинз", R.drawable.egoist, 0);
+        LowLevelBook futureBook = new LowLevelBook("Будущее", "Глуховский", R.drawable.future, 0);
+        LowLevelBook sapiensBook = new LowLevelBook("Sapiens. Краткая история человечества", "Харари", R.drawable.sapiens, 0);
+        LowLevelBook mandelBook = new LowLevelBook("Я вернулся в мой город", "Мандельштам", R.drawable.go_back_to_my_town, 0);
+        LowLevelBook orwellBook = new LowLevelBook("1984", "Оруэлл", R.drawable.orwell, 0);
+        LowLevelBook jobsBook = new LowLevelBook("Стив Джобс", "Айзексон", R.drawable.steve_jobs, 0);
+        LowLevelBook dokinsBook = new LowLevelBook("Эгоистичный ген", "Докинз", R.drawable.egoist, 0);
+        LowLevelBook adamsBook = new LowLevelBook("Автостопом по галактике", "Адамс", R.drawable.autostop, 0);
 
-        List<Book> initialData = new ArrayList<>();
+        List<LowLevelBook> initialData = new ArrayList<>();
         initialData.add(futureBook);
         initialData.add(sapiensBook);
         initialData.add(mandelBook);
         initialData.add(orwellBook);
         initialData.add(jobsBook);
         initialData.add(dokinsBook);
+        initialData.add(adamsBook);
 
-        for (Book data : initialData)
+        for (LowLevelBook data : initialData)
         {
             ContentValues contentValues = new ContentValues();
-            contentValues.put(BookContract.BookEntry.Name, data.getName());
-            contentValues.put(BookContract.BookEntry.Author, data.getAuthor());
-            contentValues.put(BookContract.BookEntry.Image, data.getImage());
-            contentValues.put(BookContract.BookEntry.ISBN, data.getIsbn());
+            contentValues.put(BookContract.BookEntry.Name, data.bookTitle);
+            contentValues.put(BookContract.BookEntry.Author, data.authorSurname);
+            contentValues.put(BookContract.BookEntry.Image, data.bookImage);
+            contentValues.put(BookContract.BookEntry.ISBN, data.isbn);
 
             db.insert(BookContract.BookEntry.TABLE_NAME, null, contentValues);
         }
@@ -85,7 +73,7 @@ public class DbHelper extends SQLiteOpenHelper
 
     }
 
-    public List<Book> getBooks()
+    public List<LowLevelBook> getBooks()
     {
         String[] columns = {
                 BookContract.BookEntry._ID,
@@ -103,7 +91,7 @@ public class DbHelper extends SQLiteOpenHelper
                 null,
                 null);
 
-        List<Book> books = new ArrayList<>();
+        List<LowLevelBook> books = new ArrayList<>();
 
         while (cursor.moveToNext())
         {
@@ -113,16 +101,16 @@ public class DbHelper extends SQLiteOpenHelper
             int image = cursor.getInt(cursor.getColumnIndex(BookContract.BookEntry.Image));
             long isbn = cursor.getLong(cursor.getColumnIndex(BookContract.BookEntry.ISBN));
 
-            books.add(new Book(id, name, author, image, isbn));
+            books.add(new LowLevelBook(id, name, author, image, isbn));
         }
 
         cursor.close();
         return books;
     }
 
-    public List<Book> search(String searchQuery)
+    public List<LowLevelBook> search(String searchQuery)
     {
-        List<Book> results = new ArrayList<>();
+        List<LowLevelBook> results = new ArrayList<>();
 
         String[] columns =
                 {
@@ -155,7 +143,7 @@ public class DbHelper extends SQLiteOpenHelper
             int image = cursor.getInt(cursor.getColumnIndex(BookContract.BookEntry.Image));
             long isbn = cursor.getLong(cursor.getColumnIndex(BookContract.BookEntry.ISBN));
 
-            results.add(new Book(name, author, image, isbn));
+            results.add(new LowLevelBook(name, author, image, isbn));
         }
 
         cursor.close();

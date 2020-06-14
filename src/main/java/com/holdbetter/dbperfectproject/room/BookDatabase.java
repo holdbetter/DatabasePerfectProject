@@ -75,7 +75,7 @@ public abstract class BookDatabase extends RoomDatabase
                 gluh.books.add(new BookEntity(1, "Метро 2034", R.drawable.metro2034, -1));
                 harari.books.add(new BookEntity(2, "Sapiens. Краткая история человечества", R.drawable.sapiens, -1));
                 mandel.books.add(new BookEntity(3, "Я вернулся в мой город", R.drawable.go_back_to_my_town, -1));
-                orwell.books.add(new BookEntity(4, "1984", R.drawable.one_nine_eight_four, -1));
+                orwell.books.add(new BookEntity(4, "1984", R.drawable.orwell, -1));
                 aizekson.books.add(new BookEntity(5, "Стив Джобс", R.drawable.steve_jobs, -1));
                 dokinz.books.add(new BookEntity(6, "Эгоистичный ген", R.drawable.egoist, -1));
 

@@ -1,13 +1,11 @@
 package com.holdbetter.dbperfectproject.model;
 
+import com.holdbetter.dbperfectproject.services.BookDataInfo;
+
 import java.util.Objects;
 
 // holder for required book info
-public class BookDataRequest
+public class BookDataRequest extends BookDataInfo
 {
-    public long id;
-    public String bookTitle;
-    public int bookImage;
     public String authorName;
-    public String authorSurname;
 }
