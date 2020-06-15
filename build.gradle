@@ -1,14 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        release {
-            storeFile file('C:\\Users\\holdbetter\\Desktop\\DbPerfectProject\\keystore_folder\\upload_key_new.jks')
-            storePassword 'test12345'
-            keyAlias = 'release_key'
-            keyPassword 'samsung12345'
-        }
-    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
@@ -27,7 +19,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 
