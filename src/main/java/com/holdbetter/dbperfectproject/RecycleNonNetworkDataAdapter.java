@@ -89,12 +89,6 @@ public class RecycleNonNetworkDataAdapter extends RecyclerView.Adapter<RecycleNo
         return books != null ? books.size() : 0;
     }
 
-//    public void setBooks(List<? extends BookDataInfo> books)
-//    {
-//        this.books = books;
-//        notifyDataSetChanged();
-//    }
-
     @Override
     public void setBooks(List<?> books)
     {

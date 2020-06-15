@@ -16,16 +16,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.holdbetter.dbperfectproject.databinding.EmptyInstanceBinding;
 import com.holdbetter.dbperfectproject.databinding.ResultInstanceBinding;
 import com.holdbetter.dbperfectproject.model.BookDataRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHolder>
+public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
+    private static final int EMPTY_INSTANCE = -1;
+    private static final int RESULT = 1;
+
     private RequestManager glide;
-    private List<BookDataRequest> books = new ArrayList<>();
+    private List<BookDataRequest> books;
 
     public ResultAdapter(List<BookDataRequest> books, RequestManager glide)
     {
@@ -35,39 +39,68 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHo
 
     @NonNull
     @Override
-    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        View bookInstance = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.result_instance, parent, false);
+        if (viewType == EMPTY_INSTANCE)
+        {
+            View emptyInstance = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.empty_instance, parent, false);
+            return new EmptyViewHolder(EmptyInstanceBinding.bind(emptyInstance));
+        }
+        else
+        {
+            View bookInstance = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.result_instance, parent, false);
+            return new BookViewHolder(ResultInstanceBinding.bind(bookInstance));
+        }
 
-        return new BookViewHolder(ResultInstanceBinding.bind(bookInstance));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)
     {
+        if (getItemViewType(position) == EMPTY_INSTANCE)
+        {
+            return;
+        }
+
+        BookViewHolder bookViewHolder = (BookViewHolder) holder;
+
         BookDataRequest bookDataRequest = books.get(position);
 
         glide.load(bookDataRequest.bookImage)
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .into(holder.bookImage);
+                .into(bookViewHolder.bookImage);
 
-        holder.bookName.setText(bookDataRequest.bookTitle);
+        bookViewHolder.bookName.setText(bookDataRequest.bookTitle);
 
         String nameAndSurname = String.valueOf(bookDataRequest.authorName.toUpperCase().charAt(0))
                 .concat(". ").concat(bookDataRequest.authorSurname);
 
         SpannableStringBuilder span = new SpannableStringBuilder(nameAndSurname);
         span.setSpan(new RelativeSizeSpan(1.5f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        holder.bookAuthor.setText(span);
+        bookViewHolder.bookAuthor.setText(span);
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        if (books.size() == 0)
+        {
+            return EMPTY_INSTANCE;
+        }
+        else
+        {
+            return RESULT;
+        }
     }
 
     @Override
     public int getItemCount()
     {
-        return books != null ? books.size() : 0;
+        return books.size() != 0 ? books.size() : 1;
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder
@@ -87,6 +120,14 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.BookViewHo
             bookImage = binding.bookImage;
             bookName = binding.bookName;
             bookAuthor = binding.bookAuthor;
+        }
+    }
+
+    public static class EmptyViewHolder extends RecyclerView.ViewHolder
+    {
+        public EmptyViewHolder(@NonNull EmptyInstanceBinding binding)
+        {
+            super(binding.getRoot());
         }
     }
 }
