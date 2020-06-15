@@ -49,6 +49,8 @@ public class RecyclerFragment extends Fragment
 
     void viewSetup(RecyclerFragmentBinding binding, RecyclerType type)
     {
+        if(type == null) return;
+
         switch (type)
         {
             default:
