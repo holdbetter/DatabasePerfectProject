@@ -20,7 +20,7 @@ public class GoogleBooksViewModel extends ViewModel
 {
     private MutableLiveData<GoogleBookData> bookData;
     private MutableLiveData<String> loadingState = new MutableLiveData<>("not ready");
-    private final URL URL = new URL("https://www.googleapis.com/books/v1/volumes?q=Гарри+inauthor:rowling&orderBy=relevance&langRestrict=ru&maxResults=8&key=AIzaSyDoXCEeshumVEN742nqRPVCOqBqt6n3crA");
+    private final URL URL = new URL("https://www.googleapis.com/books/v1/volumes?q=Гарри+inauthor:rowling&orderBy=relevance&langRestrict=ru&maxResults=8");
 
     public GoogleBooksViewModel() throws MalformedURLException
     {
