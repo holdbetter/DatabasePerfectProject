@@ -71,7 +71,7 @@ public class RecycleNonNetworkDataAdapter extends RecyclerView.Adapter<RecycleNo
             String nameAndSurname = String.valueOf(bookDataRequest.authorName.toUpperCase().charAt(0))
                     .concat(". ").concat(bookDataInfo.authorSurname);
             SpannableStringBuilder span = new SpannableStringBuilder(nameAndSurname);
-            span.setSpan(new RelativeSizeSpan(1.5f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            span.setSpan(new RelativeSizeSpan(1.2f), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             holder.bookAuthor.setText(span);
         }
         else
