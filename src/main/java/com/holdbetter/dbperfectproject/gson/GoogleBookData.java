@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class GoogleBookData
 {
-
     @SerializedName("kind")
     @Expose
     public String kind;

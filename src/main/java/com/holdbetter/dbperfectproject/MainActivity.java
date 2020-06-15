@@ -1,6 +1,5 @@
 package com.holdbetter.dbperfectproject;
 
-import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity
     private ActivityMainBinding binding;
     private String searchQuery;
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

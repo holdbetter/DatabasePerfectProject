@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,10 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.holdbetter.dbperfectproject.R;
 import com.holdbetter.dbperfectproject.ResultAdapter;
-import com.holdbetter.dbperfectproject.model.BookDataRequest;
 import com.holdbetter.dbperfectproject.viewmodel.BooksViewModel;
-
-import java.util.List;
 
 public class ResultFragment extends Fragment
 {

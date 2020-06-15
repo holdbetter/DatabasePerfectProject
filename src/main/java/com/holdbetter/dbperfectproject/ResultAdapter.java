@@ -1,6 +1,5 @@
 package com.holdbetter.dbperfectproject;
 
-import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.RelativeSizeSpan;
@@ -20,7 +19,6 @@ import com.holdbetter.dbperfectproject.databinding.EmptyInstanceBinding;
 import com.holdbetter.dbperfectproject.databinding.ResultInstanceBinding;
 import com.holdbetter.dbperfectproject.model.BookDataRequest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>

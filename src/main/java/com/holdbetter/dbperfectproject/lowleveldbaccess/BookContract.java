@@ -11,7 +11,7 @@ public class BookContract
 
     static class BookEntry implements BaseColumns
     {
-        public static String TABLE_NAME = "Books";
+        public static final String TABLE_NAME = "Books";
 
         public static final String _ID = BaseColumns._ID;
         public static final String Name = "name";

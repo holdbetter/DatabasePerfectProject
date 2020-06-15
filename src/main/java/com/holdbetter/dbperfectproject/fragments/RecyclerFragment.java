@@ -27,7 +27,7 @@ import com.holdbetter.dbperfectproject.viewmodel.LowLevelBookViewModel;
 
 public class RecyclerFragment extends Fragment
 {
-    private RecyclerType type = RecyclerType.SQLiteOpenHelper;
+    private RecyclerType type;
 
     public static RecyclerFragment getInstance(RecyclerType type)
     {

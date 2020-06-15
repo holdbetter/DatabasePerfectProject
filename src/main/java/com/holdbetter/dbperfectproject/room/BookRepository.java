@@ -17,22 +17,14 @@ import java.util.concurrent.Future;
 public class BookRepository
 {
     private BooksDao booksDao;
-    public LiveData<List<BookDataRequest>> mBooksDataList1;
-    public LiveData<List<BookDataRequest>> mBooksDataList2;
-    public LiveData<List<BookDataRequest>> mBooksDataList3;
-    public LiveData<List<BookDataRequest>> mBooksDataList4;
-    public LiveData<List<BookDataRequest>> mBooksDataList5;
+    public LiveData<List<BookDataRequest>> mBooksDataList;
 
     public BookRepository(Application application)
     {
         BookDatabase database = BookDatabase.getDatabase(application);
         booksDao = database.bookDao();
 
-        mBooksDataList1 = booksDao.getBooksAndAuthor();
-        mBooksDataList2 = booksDao.getBooksAndAuthor();
-        mBooksDataList3 = booksDao.getBooksAndAuthor();
-        mBooksDataList4 = booksDao.getBooksAndAuthor();
-        mBooksDataList5 = booksDao.getBooksAndAuthor();
+        mBooksDataList = booksDao.getBooksAndAuthor();
     }
 
     public Future<List<BookDataRequest>> searchBook(String queryString)

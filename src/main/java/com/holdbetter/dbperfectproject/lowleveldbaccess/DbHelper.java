@@ -151,33 +151,6 @@ public class DbHelper extends SQLiteOpenHelper
         return results;
     }
 
-
-//    public static class DbImageHelper
-//    {
-//        public static byte[] getBytes(Bitmap bitmap)
-//        {
-//            byte[] result = null;
-//
-//            try (ByteArrayOutputStream stream = new ByteArrayOutputStream())
-//            {
-//                bitmap.compress(Bitmap.CompressFormat.WEBP, 0, stream);
-//                result = new byte[stream.size()];
-//                result = stream.toByteArray();
-//            }
-//            catch (IOException e)
-//            {
-//                e.printStackTrace();
-//            }
-//
-//            return result;
-//        }
-//
-//        public static Bitmap getImage(byte[] image)
-//        {
-//            return BitmapFactory.decodeByteArray(image, 0, image.length);
-//        }
-//    }
-
     @Override
     public synchronized void close()
     {
